@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const Note = ({ title, content, date, id, onDelete, onEdit }) => {
+const Note = ({ title, content, date, color, id, onDelete, onEdit }) => {
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric"
   });
   return (
-    <NoteWrapper>
+    <NoteWrapper style={{ backgroundColor: color }}>
       <DeleteButton onClick={() => onDelete(id)}>X</DeleteButton>
       <NoteTitle>{title}</NoteTitle>
       <NoteDate>{formattedDate}</NoteDate>

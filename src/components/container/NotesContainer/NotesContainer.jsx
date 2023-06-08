@@ -6,12 +6,13 @@ import styled from "styled-components";
 const NotesContainer = () => {
   const [notes, setNotes] = useState([]);
   const [dateType, setDateType] = useState(false);
-  const handleFormSubmit = (title, content, date) => {
+  const handleFormSubmit = (title, content, date, color) => {
     const newNote = {
       id: new Date().getTime(),
       title,
       content,
-      date
+      date,
+      color
     };
 
     setNotes([...notes, newNote]);
@@ -53,6 +54,7 @@ const NotesContainer = () => {
                   title={note.title}
                   date={note.date}
                   content={note.content}
+                  color={note.color}
                 />
               ))}
           </NotesGrid>
@@ -103,7 +105,7 @@ const CloseButton = styled.button`
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: purple;
+  color: #e74c3c;
   &:hover {
     color: #c0392b;
   }

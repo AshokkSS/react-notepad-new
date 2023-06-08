@@ -5,7 +5,8 @@ function NoteForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     title: "",
     date: "",
-    note: ""
+    note: "",
+    color: "#fefac0"
   });
 
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -20,11 +21,12 @@ function NoteForm({ onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(formData.title, formData.note, formData.date);
+    onSubmit(formData.title, formData.note, formData.date, formData.color);
     setFormData({
       title: "",
       date: "",
-      note: ""
+      note: "",
+      color: "#fefac0"
     });
   };
 
@@ -63,6 +65,13 @@ function NoteForm({ onSubmit }) {
             onChange={handleInputChange}
             rows={15}
             required
+          />
+          <h2>Note Colour</h2>
+          <input
+            type="color"
+            name="color"
+            value={formData.color}
+            onChange={handleInputChange}
           />
           <SubmitButton>Add To Notes</SubmitButton>
         </>
