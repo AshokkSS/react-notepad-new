@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Note = ({ title, content, date }) => {
+const Note = ({ title, content, date, id, onDelete }) => {
   return (
     <NoteWrapper>
+      <DeleteButton onClick={() => onDelete(id)}>X</DeleteButton>
       <NoteTitle>{title}</NoteTitle>
       <NoteDate>{date}</NoteDate>
       <NoteContent>{content}</NoteContent>
@@ -14,7 +15,7 @@ const Note = ({ title, content, date }) => {
 export default Note;
 
 const NoteWrapper = styled.div`
-  width: 200px;
+  width: 400px;
   min-height: 150px;
   padding: 16px;
   margin: 16px;
@@ -24,6 +25,17 @@ const NoteWrapper = styled.div`
   border-radius: 8px;
   font-family: "Helvetica", "Arial", sans-serif;
   position: relative;
+`;
+
+const DeleteButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 `;
 
 const NoteTitle = styled.div`

@@ -1,14 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
 import styled from "styled-components";
-import { Header, NoteForm, Note, NotesContainer } from "./components";
+import { Header, NotesContainer } from "./components";
 
 function App() {
   return (
     <AppContainer>
       <Header titleContent="Ashokk's React Notepad" />
-      {/* <NoteForm /> */}
-      {/* <Note title="Reminder" content="Buy groceries for the week." /> */}
       <NotesContainer />
     </AppContainer>
   );
@@ -17,5 +15,5 @@ function App() {
 export default App;
 
 const AppContainer = styled.div`
-  height: 100%;
+  height: 100vh;
 `;

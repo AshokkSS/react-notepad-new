@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Button from "@mui/material/Button";
 
 function NoteForm({ onSubmit }) {
   const [formData, setFormData] = useState({
@@ -7,6 +8,8 @@ function NoteForm({ onSubmit }) {
     date: "",
     note: ""
   });
+
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -28,34 +31,43 @@ function NoteForm({ onSubmit }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2>New Note</h2>
-      <input
-        type="text"
-        placeholder="Title"
-        className="form--input"
-        name="title"
-        value={formData.title}
-        onChange={handleInputChange}
-        required
-      />
-      <input
-        type="date"
-        className="form--input"
-        name="date"
-        value={formData.date}
-        onChange={handleInputChange}
-        required
-      />
-      <textarea
-        placeholder="Note"
-        className="form--input"
-        name="note"
-        value={formData.note}
-        onChange={handleInputChange}
-        rows={15}
-        required
-      />
-      <SubmitButton>Add To Notes</SubmitButton>
+      {isFormVisible ? (
+        <>
+          <h2>New Note</h2>
+          <CloseButton onClick={() => setIsFormVisible(false)}>X</CloseButton>
+          <input
+            type="text"
+            placeholder="Title"
+            className="form--input"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            type="date"
+            className="form--input"
+            name="date"
+            value={formData.date}
+            onChange={handleInputChange}
+            required
+          />
+          <textarea
+            placeholder="Note"
+            className="form--input"
+            name="note"
+            value={formData.note}
+            onChange={handleInputChange}
+            rows={15}
+            required
+          />
+          <SubmitButton>Add To Notes</SubmitButton>
+        </>
+      ) : (
+        <OpenButton onClick={() => setIsFormVisible(true)}>
+          Open Form
+        </OpenButton>
+      )}
     </Form>
   );
 }
@@ -63,12 +75,15 @@ function NoteForm({ onSubmit }) {
 export default NoteForm;
 
 const Form = styled.form`
+  position: relative;
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
   padding: 20px 48px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  height: 85vh;
+  width: 300px;
   .form--input {
     width: 100%;
     padding: 12px 20px;
@@ -84,6 +99,10 @@ const Form = styled.form`
       outline: none;
     }
   }
+  textarea.form--input {
+    flex-grow: 2;
+    resize: none;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -93,11 +112,41 @@ const SubmitButton = styled.button`
   width: 100%;
   border: none;
   color: white;
-  background-color: #008cba;
+  background-color: purple;
   cursor: pointer;
   font-size: 18px;
   transition: background-color 0.3s ease;
   &:hover {
     background-color: #005f8a;
+  }
+`;
+
+const OpenButton = styled.button`
+  height: 40px;
+  border: none;
+  background-color: purple;
+  color: white;
+  padding: 0 20px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: pink;
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #e74c3c;
+  &:hover {
+    color: #c0392b;
   }
 `;

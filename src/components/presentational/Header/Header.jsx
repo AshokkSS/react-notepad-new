@@ -10,7 +10,7 @@ function Header(props) {
   );
 }
 const StyledHeader = styled.div`
-  display: flex;
+  display: fixed;
   align-items: center;
   background-color: purple;
   height: 90px;
