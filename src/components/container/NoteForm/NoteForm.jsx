@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "@mui/material/Button";
 
 function NoteForm({ onSubmit }) {
   const [formData, setFormData] = useState({
@@ -29,12 +28,16 @@ function NoteForm({ onSubmit }) {
     });
   };
 
+  const toggleVisibility = () => {
+    setIsFormVisible((prevState) => !prevState);
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       {isFormVisible ? (
         <>
           <h2>New Note</h2>
-          <CloseButton onClick={() => setIsFormVisible(false)}>X</CloseButton>
+          <CloseButton onClick={toggleVisibility}>X</CloseButton>
           <input
             type="text"
             placeholder="Title"
@@ -64,9 +67,7 @@ function NoteForm({ onSubmit }) {
           <SubmitButton>Add To Notes</SubmitButton>
         </>
       ) : (
-        <OpenButton onClick={() => setIsFormVisible(true)}>
-          Open Form
-        </OpenButton>
+        <OpenButton onClick={toggleVisibility}>Open Form</OpenButton>
       )}
     </Form>
   );

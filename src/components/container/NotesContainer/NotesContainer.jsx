@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const NotesContainer = () => {
   const [notes, setNotes] = useState([]);
-
+  const [dateType, setDateType] = useState(false);
   const handleFormSubmit = (title, content, date) => {
     const newNote = {
       id: new Date().getTime(),
@@ -20,24 +20,41 @@ const NotesContainer = () => {
     setNotes(notes.filter((note) => note.id !== id));
   };
 
+  const toggleDate = () => {
+    setDateType((prevState) => !prevState);
+  };
+
   return (
     <Container>
       <FormWrapper>
         <NoteForm onSubmit={handleFormSubmit} />
       </FormWrapper>
+
       {notes.length > 0 ? (
         <NotesGridWrapper>
+          <CloseButton onClick={toggleDate}>
+            {dateType
+              ? "Toggle to Descending Date"
+              : "Toggle to Ascending Date"}
+          </CloseButton>
+
           <NotesGrid>
-            {notes.map((note) => (
-              <Note
-                key={note.id} // Using id as key for each Note component
-                id={note.id}
-                onDelete={handleDelete}
-                title={note.title}
-                date={note.date}
-                content={note.content}
-              />
-            ))}
+            {notes
+              .sort((a, b) =>
+                dateType
+                  ? new Date(a.date) - new Date(b.date)
+                  : new Date(b.date) - new Date(a.date)
+              )
+              .map((note) => (
+                <Note
+                  key={note.id}
+                  id={note.id}
+                  onDelete={handleDelete}
+                  title={note.title}
+                  date={note.date}
+                  content={note.content}
+                />
+              ))}
           </NotesGrid>
         </NotesGridWrapper>
       ) : (
@@ -77,4 +94,17 @@ const Title = styled.h2`
   width: 100%;
   font-weight: 700;
   font-size: 26px;
+`;
+const CloseButton = styled.button`
+  position: relative;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: purple;
+  &:hover {
+    color: #c0392b;
+  }
 `;

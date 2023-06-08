@@ -6,7 +6,7 @@ import { Header, NotesContainer } from "./components";
 function App() {
   return (
     <AppContainer>
-      <Header titleContent="Ashokk's React Notepad" />
+      <Header titleContent="Ashokk's React Reminders" />
       <NotesContainer />
     </AppContainer>
   );
