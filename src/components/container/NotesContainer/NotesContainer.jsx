@@ -28,7 +28,7 @@ const NotesContainer = () => {
   return (
     <Container>
       <FormWrapper>
-        <NoteForm onSubmit={handleFormSubmit} />
+        <NoteForm onFormSubmit={handleFormSubmit} />
       </FormWrapper>
 
       {notes.length > 0 ? (
@@ -48,7 +48,6 @@ const NotesContainer = () => {
               )
               .map((note) => (
                 <Note
-                  key={note.id}
                   id={note.id}
                   onDelete={handleDelete}
                   title={note.title}
@@ -88,6 +87,10 @@ const NotesGrid = styled.div`
   grid-gap: 20px;
   height: 100%;
   padding: 20px;
+
+  @media screen and (max-width: 1080px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Title = styled.h2`

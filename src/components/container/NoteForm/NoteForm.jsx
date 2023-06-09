@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function NoteForm({ onSubmit }) {
+function NoteForm({ onFormSubmit }) {
   const [formData, setFormData] = useState({
     title: "",
     date: "",
     note: "",
-    color: "#fefac0"
+    color: "#fefbc0"
   });
 
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -21,7 +21,7 @@ function NoteForm({ onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(formData.title, formData.note, formData.date, formData.color);
+    onFormSubmit(formData.title, formData.note, formData.date, formData.color);
     setFormData({
       title: "",
       date: "",
@@ -92,8 +92,9 @@ const Form = styled.form`
   padding: 20px 48px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  height: 85vh;
+  height: calc(100vh - 190px); /* Adjusted the height */
   width: 300px;
+  overflow-y: auto;
   .form--input {
     width: 100%;
     padding: 12px 20px;
